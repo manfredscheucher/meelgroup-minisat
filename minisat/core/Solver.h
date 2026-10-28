@@ -520,6 +520,7 @@ public:
             binDRUP_flush(drup_file);
     }
 
+  public:
     static inline void binDRUP_flush(FILE* drup_file)
     {
         //        fwrite(drup_buf, sizeof(unsigned char), buf_len, drup_file);
@@ -527,6 +528,8 @@ public:
         buf_ptr = drup_buf;
         buf_len = 0;
     }
+
+  protected:
 #endif
 
     // Static helpers:

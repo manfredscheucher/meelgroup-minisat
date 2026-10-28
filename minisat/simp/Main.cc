@@ -235,6 +235,7 @@ int main(int argc, char** argv)
             printf("UNSATISFIABLE\n");
             if (S.drup_file) {
 #ifdef BIN_DRUP
+                S.binDRUP_flush(S.drup_file);
                 fputc('a', S.drup_file);
                 fputc(0, S.drup_file);
 #else
