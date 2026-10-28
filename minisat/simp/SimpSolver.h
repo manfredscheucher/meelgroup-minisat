@@ -46,7 +46,7 @@ class SimpSolver : public Solver
     bool    addClause (Lit p, Lit q);        // Add a binary clause to the solver.
     bool    addClause (Lit p, Lit q, Lit r); // Add a ternary clause to the solver.
     bool    addClause (Lit p, Lit q, Lit r, Lit s); // Add a quaternary clause to the solver. 
-    bool    addClause_(      vec<Lit>& ps);
+    bool    addClause_(      vec<Lit>& ps, bool rcheck = true);
     bool    substitute(Var v, Lit x);  // Replace all occurences of v with x (may cause a contradiction).
 
     // Variable mode:

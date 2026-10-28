@@ -151,7 +151,7 @@ lbool SimpSolver::solve_(bool do_simp, bool turn_off_simp)
     return result;
 }
 
-bool SimpSolver::addClause_(vec<Lit>& ps)
+bool SimpSolver::addClause_(vec<Lit>& ps, bool rcheck)
 {
 #ifndef NDEBUG
     for (int i = 0; i < ps.size(); i++)
@@ -160,7 +160,7 @@ bool SimpSolver::addClause_(vec<Lit>& ps)
 
     int nclauses = clauses.size();
 
-    if (use_rcheck && implied(ps))
+    if (rcheck && use_rcheck && implied(ps))
         return true;
 
     if (!Solver::addClause_(ps))
@@ -571,7 +571,7 @@ bool SimpSolver::eliminateVar(Var v)
     vec<Lit>& resolvent = add_tmp;
     for (int i = 0; i < pos.size(); i++)
         for (int j = 0; j < neg.size(); j++)
-            if (merge(ca[pos[i]], ca[neg[j]], v, resolvent) && !addClause_(resolvent))
+            if (merge(ca[pos[i]], ca[neg[j]], v, resolvent) && !addClause_(resolvent, false))
                 return false;
 
     for (int i = 0; i < cls.size(); i++){
@@ -614,7 +614,7 @@ bool SimpSolver::substitute(Var v, Lit x)
         }
 
 
-        if (!addClause_(subst_clause))
+        if (!addClause_(subst_clause, false))
             return ok = false;
 
         if (drup_debug) { fprintf(drup_file, "[substitute] "); }
